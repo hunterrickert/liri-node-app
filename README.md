@@ -1,2 +1,2 @@
 # liri-node-app
-home work ten - started fri aug 9
+homework ten - started fri aug 9
