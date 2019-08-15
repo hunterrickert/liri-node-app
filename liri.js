@@ -62,9 +62,17 @@ function searchMovies(search) {
     console.log(queryUrl);
 
     axios.get(queryUrl).then(
+
+
         function (response) {
             console.log("Release Year: " + response.data.Year);
-            console.log(response.data);
+            console.log("IMDB Rating: " + response.data.imdbRating);
+            console.log("RT Rating: " + response.data.Ratings.JSON.stringify());
+            console.log("Country: " + response.data.Country);
+            console.log("Language: " + response.data.Language);
+            console.log("Plot: " + response.data.Plot);
+            console.log("Actors: " + response.data.Actors);
+            // console.log(response.data);
         })
 
 }
