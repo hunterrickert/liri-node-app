@@ -86,7 +86,9 @@ function searchConcerts(search) {
 
     axios.get(queryUrl).then(
         function (response) {
-            console.log(response.data);
+            // console.log("Venue: " + response.data.venue.name);
+            // console.log("Date: " + response.data.datetime);
+            console.log(response.data.datetime)
         })
 
 }
