@@ -76,7 +76,7 @@ function searchMovies(search) {
             // console.log("Information about")
             // console.log("Release Year: " + movies.Year);
             // console.log("IMDB Rating: " + movies.imdbRating);
-            console.log("RT Rating: " + movies.Ratings[1]);
+            console.log("RT Rating: " + movies.Ratings[1].Value);
             // console.log("Country: " + movies.Country);
             // console.log("Language: " + movies.Language);
             // console.log("Plot: " + movies.Plot);
@@ -95,18 +95,18 @@ function searchConcerts(search) {
 
     axios.get(queryUrl).then(
         function (response) {
-            let concerts = response.data
-            
-            // for (let i = 1; i < concerts.length; i++) {
+            let concerts = response.data;
+          
+             for (let i = 0; i < concerts.length; i++) {
 
-                console.log("Vanue Name: " + concerts[0].venue.name);
-                console.log("Venue Location: " + concerts[0].venue.country);
+                console.log("Vanue Name: " + concerts[i].venue.name);
+                console.log("Venue Location: " + concerts[i].venue.country);
                 
                 //ask shelly about this!!!
-            console.log("Date: " + concerts[0].datetime);
+           console.log("Date: " + moment(concerts[i].datetime).format("MM/DD/YYYY"));
             // console.log(response.data.datetime.moment())
             // console.log(concerts)
-            // }
+            }
         })
 
 }
