@@ -14,16 +14,22 @@ var choose = function (action, search) {
     switch (action) {
         case 'spotify-this-song':
             console.log("Spotify chosen");
+            console.log("---------------------------")
             searchSpotify(search);
             break;
 
         case 'concerts-this':
+                console.log("Bands in Town chosen");
+                console.log("---------------------------")
             searchConcerts(search);
             break;
 
         case 'movies-this':
+                console.log("OMDB chosen");
+                console.log("---------------------------")
             searchMovies(search);
             break;
+
         case 'do-what-it-says':
             searchDoWhatItSays();
             break;
@@ -41,15 +47,16 @@ function searchSpotify(search) {
         }
         let songs = data.tracks.items
         //    console.log(songs[0]);
-        for (let i = 1; i < songs.length; i++) {
-            console.log("Artist: " + songs[i].artists[0].name)
-            console.log("Song Name: " + songs[i].name)
-            console.log("Link: " + songs[i].preview_url)
-            console.log("Album: " + songs[i].album.name)
-            console.log("-----------------------------------")
+        // for (let i = 0; i < songs.length; i++) {
+        console.log("Artist: " + songs[0].artists[0].name)
+        console.log("Song Name: " + songs[0].name)
+        console.log("Link: " + songs[0].preview_url)
+        console.log("Album: " + songs[0].album.name)
+        console.log("-----------------------------------")
+        // console.log(songs[0]);
 
 
-        }
+        // }
 
     });
 }
@@ -63,15 +70,17 @@ function searchMovies(search) {
 
     axios.get(queryUrl).then(
 
-
+    
         function (response) {
-            console.log("Release Year: " + response.data.Year);
-            console.log("IMDB Rating: " + response.data.imdbRating);
-            console.log("RT Rating: " + response.data.Ratings.JSON.stringify());
-            console.log("Country: " + response.data.Country);
-            console.log("Language: " + response.data.Language);
-            console.log("Plot: " + response.data.Plot);
-            console.log("Actors: " + response.data.Actors);
+            let movies = response.data;
+            // console.log("Information about")
+            // console.log("Release Year: " + movies.Year);
+            // console.log("IMDB Rating: " + movies.imdbRating);
+            console.log("RT Rating: " + movies.Ratings[1]);
+            // console.log("Country: " + movies.Country);
+            // console.log("Language: " + movies.Language);
+            // console.log("Plot: " + movies.Plot);
+            // console.log("Actors: " + movies.Actors);
             // console.log(response.data);
         })
 
@@ -86,28 +95,37 @@ function searchConcerts(search) {
 
     axios.get(queryUrl).then(
         function (response) {
-            // console.log("Venue: " + response.data.venue.name);
-            // console.log("Date: " + response.data.datetime);
-            console.log(response.data.datetime)
+            let concerts = response.data
+            
+            // for (let i = 1; i < concerts.length; i++) {
+
+                console.log("Vanue Name: " + concerts[0].venue.name);
+                console.log("Venue Location: " + concerts[0].venue.country);
+                
+                //ask shelly about this!!!
+            console.log("Date: " + concerts[0].datetime);
+            // console.log(response.data.datetime.moment())
+            // console.log(concerts)
+            // }
         })
 
 }
 
-function searchDoWhatItSays (){
+function searchDoWhatItSays() {
 
-    fs.readFile("random.txt", "utf8", function(error, data) {
+    fs.readFile("random.txt", "utf8", function (error, data) {
 
         // If the code experiences any errors it will log the error to the console.
         if (error) {
-          return console.log(error);
+            return console.log(error);
         }
-      
+
         // We will then print the contents of data
-        console.log(data);
-      
+        // console.log(data);
+
         // Then split it by commas (to make it more readable)
         var dataArr = data.split(",");
-      
+
         // We will then re-display the content as an array for later use.
         console.log(dataArr);
         action = dataArr[0];
@@ -116,7 +134,7 @@ function searchDoWhatItSays (){
         console.log(search);
 
         choose(action, search);
-      
-      });
+
+    });
 }
 
