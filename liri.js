@@ -19,14 +19,14 @@ var choose = function (action, search) {
             break;
 
         case 'concerts-this':
-                console.log("Bands in Town chosen");
-                console.log("---------------------------")
+            console.log("Bands in Town chosen");
+            console.log("---------------------------")
             searchConcerts(search);
             break;
 
         case 'movies-this':
-                console.log("OMDB chosen");
-                console.log("---------------------------")
+            console.log("OMDB chosen");
+            console.log("---------------------------")
             searchMovies(search);
             break;
 
@@ -46,17 +46,18 @@ function searchSpotify(search) {
             return console.log('Error occurred: ' + err);
         }
         let songs = data.tracks.items
+
         //    console.log(songs[0]);
-        // for (let i = 0; i < songs.length; i++) {
-        console.log("Artist: " + songs[0].artists[0].name)
-        console.log("Song Name: " + songs[0].name)
-        console.log("Link: " + songs[0].preview_url)
-        console.log("Album: " + songs[0].album.name)
+        for (let i = 0; i < songs.length; i++) {
+        console.log("Artist: " + songs[i].artists[0].name)
+        console.log("Song Name: " + songs[i].name)
+        console.log("Link: " + songs[i].preview_url)
+        console.log("Album: " + songs[i].album.name)
         console.log("-----------------------------------")
         // console.log(songs[0]);
 
 
-        // }
+        }
 
     });
 }
@@ -66,22 +67,26 @@ function searchMovies(search) {
     var queryUrl = "http://www.omdbapi.com/?t=" + search + "&y=&plot=short&apikey=trilogy";
 
     // This line is just to help us debug against the actual URL.
-    console.log(queryUrl);
+    // console.log(queryUrl);
 
     axios.get(queryUrl).then(
 
-    
+
         function (response) {
             let movies = response.data;
-            // console.log("Information about")
-            // console.log("Release Year: " + movies.Year);
-            // console.log("IMDB Rating: " + movies.imdbRating);
-            console.log("RT Rating: " + movies.Ratings[1].Value);
-            // console.log("Country: " + movies.Country);
-            // console.log("Language: " + movies.Language);
-            // console.log("Plot: " + movies.Plot);
-            // console.log("Actors: " + movies.Actors);
-            // console.log(response.data);
+
+            for (let i = 0; i < movies.length; i++) {
+
+            console.log("Information About " + search + ":")
+            console.log("Release Year: " + movies[i].Year);
+            console.log("IMDB Rating: " + movies[i].imdbRating);
+            console.log("RT Rating: " + movies[i].Ratings[1].Value);
+            console.log("Country: " + movies[i].Country);
+            console.log("Language: " + movies[i].Language);
+            console.log("Plot: " + movies[i].Plot);
+            console.log("Actors: " + movies[i].Actors);
+            console.log("----------------------------------");
+            }
         })
 
 }
@@ -96,16 +101,17 @@ function searchConcerts(search) {
     axios.get(queryUrl).then(
         function (response) {
             let concerts = response.data;
-          
-             for (let i = 0; i < concerts.length; i++) {
+
+            for (let i = 0; i < concerts.length; i++) {
 
                 console.log("Vanue Name: " + concerts[i].venue.name);
                 console.log("Venue Location: " + concerts[i].venue.country);
-                
+
                 //ask shelly about this!!!
-           console.log("Date: " + moment(concerts[i].datetime).format("MM/DD/YYYY"));
-            // console.log(response.data.datetime.moment())
-            // console.log(concerts)
+                console.log("Date: " + moment(concerts[i].datetime).format("MM/DD/YYYY"));
+                console.log("-----------------------------------------")
+                // console.log(response.data.datetime.moment())
+                // console.log(concerts)
             }
         })
 
