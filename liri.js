@@ -40,7 +40,9 @@ var choose = function (action, search) {
 choose(action, search);
 
 function searchSpotify(search) {
-    console.log("Spotify Function running");
+    console.log("Spotify Function running...");
+    console.log(" ");
+    console.log("--------------------------")
     spotify.search({ type: 'track', query: search }, function (err, data) {
         if (err) {
             return console.log('Error occurred: ' + err);
@@ -49,12 +51,12 @@ function searchSpotify(search) {
 
         //    console.log(songs[0]);
         for (let i = 0; i < songs.length; i++) {
-        console.log("Artist: " + songs[i].artists[0].name)
-        console.log("Song Name: " + songs[i].name)
-        console.log("Link: " + songs[i].preview_url)
-        console.log("Album: " + songs[i].album.name)
-        console.log("-----------------------------------")
-        // console.log(songs[0]);
+            console.log("Artist: " + songs[i].artists[0].name);
+            console.log("Song Name: " + songs[i].name);
+            console.log("Link: " + songs[i].preview_url);
+            console.log("Album: " + songs[i].album.name);
+            console.log("-----------------------------------");
+            // console.log(songs[0]);
 
 
         }
@@ -74,22 +76,21 @@ function searchMovies(search) {
 
         function (response) {
             let movies = response.data;
+            
+            // for (let i = 0; i < movies.length; i++) {
+                console.log("Information About " + search + ":")
+                console.log("Release Year: " + movies.Year)
+                console.log("IMDB Rating: " + movies.imdbRating)
+                console.log("RT Rating: " + movies.Ratings[1].Value)
+                console.log("Country: " + movies.Country)
+                console.log("Language: " + movies.Language)
+                console.log("Plot: " + movies.Plot)
+                console.log("Actors: " + movies.Actors)
+                console.log("----------------------------------")
+            // };
+        });
 
-            for (let i = 0; i < movies.length; i++) {
-
-            console.log("Information About " + search + ":")
-            console.log("Release Year: " + movies[i].Year);
-            console.log("IMDB Rating: " + movies[i].imdbRating);
-            console.log("RT Rating: " + movies[i].Ratings[1].Value);
-            console.log("Country: " + movies[i].Country);
-            console.log("Language: " + movies[i].Language);
-            console.log("Plot: " + movies[i].Plot);
-            console.log("Actors: " + movies[i].Actors);
-            console.log("----------------------------------");
-            }
-        })
-
-}
+};
 
 function searchConcerts(search) {
 
